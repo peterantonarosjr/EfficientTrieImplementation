@@ -1,0 +1,6 @@
+apple
+animal
+bat
+broom
+cat
+crane

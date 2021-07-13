@@ -40,6 +40,28 @@ public class Trie {
         return searchTrie(prefix);
     }
 
+    //Print out what the Trie looks like
+    public void printTrie(TrieNode head, int depth, StringBuilder sequence){
+        if(head == null){
+            return;
+        }
+        for(int i=0; i<head.getChildren().length; i++){
+            sequence.insert(depth,head.getValue());
+            printTrie(head.getChildren()[i],depth+1,sequence);
+        }
+        if(head.getLeaf()){
+            for(int j=1; j<=depth; j++){
+                System.out.print(sequence.charAt(j));
+            }
+            System.out.println();
+        }
+
+    }
+
+    public TrieNode getRoot(){
+        return root;
+    }
+
     //Search for given string value
     private boolean searchTrie(String value){
         TrieNode head = root;
