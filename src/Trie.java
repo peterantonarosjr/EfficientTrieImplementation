@@ -29,12 +29,14 @@ public class Trie {
     //Does the word exist already in Trie?
     public boolean isWordIn(String value){
         String word = value.toLowerCase();
+        word = word.replaceAll("\\s+","");
         return searchTrie(word);
     }
 
     //Does the prefix exist already in Trie?
     public boolean isPrefixIn(String value){
         String prefix = value.toLowerCase();
+        prefix = prefix.replaceAll("\\s+","");
         return searchTrie(prefix);
     }
 

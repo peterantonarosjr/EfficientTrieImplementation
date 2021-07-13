@@ -7,7 +7,8 @@ public class Main {
         Trie testTrie = new Trie();
         testTrie.insertWord(testWord1);
         testTrie.insertWord(testWord2);
-        System.out.println(testTrie.isWordIn("wo"));
+        System.out.println(testTrie.isWordIn("world"));
+        System.out.println(testTrie.isWordIn("hello"));
 
     }
 
