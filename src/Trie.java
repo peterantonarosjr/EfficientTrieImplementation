@@ -17,10 +17,7 @@ public class Trie {
                 char current = word.charAt(i);
                 if(head.getChildren()[current-'a']==null){
                     head.getChildren()[current-'a'] = new TrieNode(current);
-                }else{
-                    head = head.getChildren()[current-'a'];
                 }
-
                 head = head.getChildren()[current-'a'];
                 if(i==word.length()-1){
                     head.setLeaf(true);
