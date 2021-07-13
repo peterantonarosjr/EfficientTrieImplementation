@@ -16,7 +16,7 @@ public class Main {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        trie.printTrie(trie.getRoot(),0,new StringBuilder(""));
+        trie.checkTrieWords(trie.getRoot(),0,new StringBuilder(""));
 
     }
 
