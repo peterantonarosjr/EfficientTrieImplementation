@@ -1,11 +1,36 @@
-import java.util.Iterator;
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class Trie {
     private TrieNode root;
+    private ArrayList<String> nodeOutput;
 
+    //Constructor
     public Trie(){
         root = new TrieNode();
+        nodeOutput = new ArrayList<String>();
+    }
+
+    //Return the trie root node -> points to level 0
+    public TrieNode getRoot(){
+        return root;
+    }
+
+    //Return the node value/level list
+    public ArrayList<String> getNodeOutput(){
+        return nodeOutput;
+    }
+
+    //Print the node value/level list
+    public void printNodeOutput(TrieNode root, int level){
+        generateNodeOutput(root,level);
+        for(int i=0; i<nodeOutput.size(); i++){
+            System.out.println(nodeOutput.get(i));
+        }
+    }
+
+    //Export the node value/level list
+    public void exportNodeOutput(TrieNode root){
+
     }
 
     //Insert a word into the tree if it's new
@@ -41,7 +66,7 @@ public class Trie {
         return searchTrie(prefix);
     }
 
-    //Check if words from file have been populated
+    //Prints words from file that have been populated in the trie -> Use to compare input Vs. received
     public void checkTrieWords(TrieNode head, int depth, StringBuilder sequence){
         if(head == null){
             return;
@@ -58,24 +83,6 @@ public class Trie {
         }
     }
 
-    public void printTrie(TrieNode currNode, int level){
-        TrieNode[] childNode = currNode.getChildren();
-        for(int i=0; i<childNode.length;i++){
-            if(childNode[i]!=null){
-                System.out.println(childNode[i].getValue());
-                if(childNode[i].isWord()){
-                    System.out.println("word found at level " + level);
-                }
-                printTrie(childNode[i], level+1);
-            }
-        }
-
-    }
-
-    public TrieNode getRoot(){
-        return root;
-    }
-
     //Search for given string value
     private boolean searchTrie(String value){
         TrieNode head = root;
@@ -87,5 +94,33 @@ public class Trie {
             head = head.getChildren()[current-'a'];
         }
         return true;
+    }
+
+    //Prints out node values and level of leaf nodes
+    public void printTrie(TrieNode currNode, int level){
+        TrieNode[] childNode = currNode.getChildren();
+        for (TrieNode trieNode : childNode) {
+            if (trieNode != null) {
+                System.out.println(trieNode.getValue());
+                if (trieNode.isWord()) {
+                    System.out.println("Word end at "+ level);
+                }
+                printTrie(trieNode, level + 1);
+            }
+        }
+    }
+
+    //Used to populate the nodeOutPut Array List stores value of all nodes and level of leaf nodes
+    private void generateNodeOutput(TrieNode currNode, int level){
+        TrieNode[] childNode = currNode.getChildren();
+        for (TrieNode trieNode : childNode) {
+            if (trieNode != null) {
+                nodeOutput.add(Character.toString(trieNode.getValue()));
+                if (trieNode.isWord()) {
+                    nodeOutput.add(""+level);
+                }
+                generateNodeOutput(trieNode, level + 1);
+            }
+        }
     }
 }

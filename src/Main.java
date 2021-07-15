@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -18,8 +19,8 @@ public class Main {
         }
 
         trie.printTrie(trie.getRoot(),0);
-
+        trie.printNodeOutput(trie.getRoot(),0);
+        //trie.exportNodeOutput(trie.getRoot());
 
     }
-
 }
