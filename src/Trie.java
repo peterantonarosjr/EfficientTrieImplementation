@@ -105,7 +105,7 @@ public class Trie {
         }
     }
 
-    //Export the node value/level list
+    //Export the node value/level list to file
     public void exportNodeOutput(TrieNode root,int level){
         if(nodeLevelStructure.isEmpty()){
             generateNodeOutput(root,level);
