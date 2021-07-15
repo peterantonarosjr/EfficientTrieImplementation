@@ -1,4 +1,5 @@
-import java.util.Locale;
+import java.util.Iterator;
+import java.util.Stack;
 
 public class Trie {
     private TrieNode root;
@@ -20,7 +21,7 @@ public class Trie {
                 }
                 head = head.getChildren()[current-'a'];
                 if(i==word.length()-1){
-                    head.setLeaf(true);
+                    head.setWord(true);
                 }
             }
         }
@@ -49,17 +50,25 @@ public class Trie {
             sequence.insert(depth,head.getValue());
             checkTrieWords(head.getChildren()[i],depth+1,sequence);
         }
-        if(head.getLeaf()){
+        if(head.isWord()){
             for(int j=1; j<=depth; j++){
                 System.out.print(sequence.charAt(j));
             }
             System.out.println();
         }
-
     }
 
-    //Print out a diagram of the populated Trie
-    public void printTrie(){
+    public void printTrie(TrieNode currNode, int level){
+        TrieNode[] childNode = currNode.getChildren();
+        for(int i=0; i<childNode.length;i++){
+            if(childNode[i]!=null){
+                System.out.println(childNode[i].getValue());
+                if(childNode[i].isWord()){
+                    System.out.println("word found at level " + level);
+                }
+                printTrie(childNode[i], level+1);
+            }
+        }
 
     }
 

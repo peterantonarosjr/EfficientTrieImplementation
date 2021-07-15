@@ -1,6 +1,3 @@
-apple
-animal
-bat
-broom
 cat
-crane
+car
+cart

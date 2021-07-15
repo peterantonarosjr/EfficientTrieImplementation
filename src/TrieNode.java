@@ -1,6 +1,6 @@
 public class TrieNode {
     private char value;
-    private boolean isLeaf;
+    private boolean isWord;
     private TrieNode[] children = new TrieNode[26];
 
     public TrieNode(){
@@ -16,11 +16,11 @@ public class TrieNode {
     public char getValue(){
         return value;
     }
-    public void setLeaf(boolean isLeaf){
-        this.isLeaf = isLeaf;
+    public void setWord(boolean isWord){
+        this.isWord = isWord;
     }
-    public boolean getLeaf(){
-        return isLeaf;
+    public boolean isWord(){
+        return isWord;
     }
 
     public TrieNode[] getChildren(){
