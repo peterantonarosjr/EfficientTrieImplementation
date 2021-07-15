@@ -2,12 +2,12 @@ import java.util.ArrayList;
 
 public class Trie {
     private TrieNode root;
-    private ArrayList<String> nodeOutput;
+    private ArrayList<String> nodeLevelStructure;
 
     //Constructor
     public Trie(){
         root = new TrieNode();
-        nodeOutput = new ArrayList<String>();
+        nodeLevelStructure = new ArrayList<String>();
     }
 
     //Return the trie root node -> points to level 0
@@ -17,20 +17,15 @@ public class Trie {
 
     //Return the node value/level list
     public ArrayList<String> getNodeOutput(){
-        return nodeOutput;
+        return nodeLevelStructure;
     }
 
     //Print the node value/level list
     public void printNodeOutput(TrieNode root, int level){
         generateNodeOutput(root,level);
-        for(int i=0; i<nodeOutput.size(); i++){
-            System.out.println(nodeOutput.get(i));
+        for(int i=0; i<nodeLevelStructure.size(); i++){
+            System.out.println(nodeLevelStructure.get(i));
         }
-    }
-
-    //Export the node value/level list
-    public void exportNodeOutput(TrieNode root){
-
     }
 
     //Insert a word into the tree if it's new
@@ -110,14 +105,22 @@ public class Trie {
         }
     }
 
+    //Export the node value/level list
+    public void exportNodeOutput(TrieNode root,int level){
+        if(nodeLevelStructure.isEmpty()){
+            generateNodeOutput(root,level);
+        }
+
+    }
+
     //Used to populate the nodeOutPut Array List stores value of all nodes and level of leaf nodes
     private void generateNodeOutput(TrieNode currNode, int level){
         TrieNode[] childNode = currNode.getChildren();
         for (TrieNode trieNode : childNode) {
             if (trieNode != null) {
-                nodeOutput.add(Character.toString(trieNode.getValue()));
+                nodeLevelStructure.add(Character.toString(trieNode.getValue()));
                 if (trieNode.isWord()) {
-                    nodeOutput.add(""+level);
+                    nodeLevelStructure.add(""+level);
                 }
                 generateNodeOutput(trieNode, level + 1);
             }

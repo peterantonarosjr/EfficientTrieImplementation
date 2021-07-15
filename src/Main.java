@@ -20,7 +20,7 @@ public class Main {
 
         trie.printTrie(trie.getRoot(),0);
         trie.printNodeOutput(trie.getRoot(),0);
-        //trie.exportNodeOutput(trie.getRoot());
+        //trie.exportNodeOutput(trie.getRoot(),0);
 
     }
 }
