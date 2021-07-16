@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class Trie {
@@ -109,6 +112,21 @@ public class Trie {
     public void exportNodeOutput(TrieNode root,int level){
         if(nodeLevelStructure.isEmpty()){
             generateNodeOutput(root,level);
+        }
+        try{
+            String path ="D:\\IntelliJ-Workspace\\BetterTrieImplementation\\nodeStructure.txt";
+            PrintWriter writer = new PrintWriter(path, StandardCharsets.UTF_8);
+
+            for(int i=0; i<nodeLevelStructure.size(); i++){
+                writer.print(nodeLevelStructure.get(i));
+                if(!Character.isLetter(nodeLevelStructure.get(i).charAt(0))){
+                    writer.println();
+                }
+            }
+
+            writer.close();
+        }catch(IOException e){
+            e.printStackTrace();
         }
 
     }
