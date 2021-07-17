@@ -6,11 +6,13 @@ import java.util.ArrayList;
 public class Trie {
     private TrieNode root;
     private ArrayList<String> nodeLevelStructure;
+    private int[][] trieMatrix;
 
     //Constructor
     public Trie(){
         root = new TrieNode();
-        nodeLevelStructure = new ArrayList<String>();
+        nodeLevelStructure = new ArrayList<>();
+        trieMatrix = new int[26][26];
     }
 
     //Return the trie root node -> points to level 0
@@ -110,9 +112,7 @@ public class Trie {
 
     //Export the node value/level list to file
     public void exportNodeOutput(TrieNode root,int level){
-        if(nodeLevelStructure.isEmpty()){
-            generateNodeOutput(root,level);
-        }
+        generateNodeOutput(root,level);
         try{
             String path ="D:\\IntelliJ-Workspace\\BetterTrieImplementation\\nodeStructure.txt";
             PrintWriter writer = new PrintWriter(path, StandardCharsets.UTF_8);
@@ -131,17 +131,53 @@ public class Trie {
 
     }
 
-    //Used to populate the nodeOutPut Array List stores value of all nodes and level of leaf nodes
-    private void generateNodeOutput(TrieNode currNode, int level){
-        TrieNode[] childNode = currNode.getChildren();
-        for (TrieNode trieNode : childNode) {
-            if (trieNode != null) {
-                nodeLevelStructure.add(Character.toString(trieNode.getValue()));
-                if (trieNode.isWord()) {
-                    nodeLevelStructure.add(""+level);
+    public void exportTrieMatrix(TrieNode root, int level){
+        generateTrieMatrix(root,level);
+        try{
+            String path = "D:\\IntelliJ-Workspace\\BetterTrieImplementation\\trieMatrix.txt";
+            PrintWriter writer = new PrintWriter(path, StandardCharsets.UTF_8);
+
+            for(int row=0; row<trieMatrix.length; row++){
+                for(int col=0; col<trieMatrix[row].length; col++){
+                    writer.print(trieMatrix[row][col]);
                 }
-                generateNodeOutput(trieNode, level + 1);
+                writer.println();
+            }
+            writer.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void generateNodeOutput(TrieNode currNode, int level){
+        TrieNode[] children = currNode.getChildren();
+        if(currNode.getChildren() == null){
+            return;
+        }
+        for(TrieNode currChild : children){
+            if(currChild!=null){
+                nodeLevelStructure.add(Character.toString(currChild.getValue()));
+                if(currChild.isWord()){
+                    //nodeLevelStructure.add("LEAF");
+                }
+                generateNodeOutput(currChild,level+1);
+            }
+        }
+
+    }
+
+    private void generateTrieMatrix(TrieNode currNode, int level){
+        TrieNode[] children = currNode.getChildren();
+        if(currNode.getChildren() == null){
+            return;
+        }
+        for(TrieNode currChild : children){
+            if(currChild!=null){
+                trieMatrix[level][currChild.getValue()-'a']= 1;
+                generateTrieMatrix(currChild,level+1);
             }
         }
     }
+
 }

@@ -18,8 +18,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        trie.printTrie(trie.getRoot(),0);
-        trie.printNodeOutput(trie.getRoot(),0);
         trie.exportNodeOutput(trie.getRoot(),0);
+        trie.exportTrieMatrix(trie.getRoot(),0);
     }
 }
