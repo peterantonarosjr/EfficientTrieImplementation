@@ -18,5 +18,6 @@ public class Main {
         }
 
         trie.printTrie(trie.getRoot(),0);
+        trie.exportNodeOutput(trie.getRoot(),0);
     }
 }
