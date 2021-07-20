@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +17,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        trie.exportNodeOutput(trie.getRoot(),0);
-        trie.exportTrieMatrix(trie.getRoot(),0);
+        trie.printTrie(trie.getRoot(),0);
     }
 }
