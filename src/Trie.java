@@ -101,13 +101,14 @@ public class Trie {
         TrieNode[] childNode = currNode.getChildren();
         for (TrieNode trieNode : childNode) {
             if (trieNode != null) {
-                System.out.println(trieNode.getValue());
-                if (trieNode.isWord()) {
-                    System.out.println("Word end at "+ level);
-                }
+                System.out.print(trieNode.getValue()+""+level+" ");
                 printTrie(trieNode, level + 1);
+                if(level==0){
+                    System.out.println();
+                }
             }
         }
+
     }
 
     //Export the node value/level list to file
@@ -116,20 +117,16 @@ public class Trie {
         try{
             String path ="D:\\IntelliJ-Workspace\\BetterTrieImplementation\\nodeStructure.txt";
             PrintWriter writer = new PrintWriter(path, StandardCharsets.UTF_8);
-
             for(int i=0; i<nodeLevelStructure.size(); i++){
                 writer.print(nodeLevelStructure.get(i));
-                if(!Character.isLetter(nodeLevelStructure.get(i).charAt(0))){
-                    writer.println();
-                }
             }
-
             writer.close();
         }catch(IOException e){
             e.printStackTrace();
         }
-
     }
+
+    //Generate the Node arrayList in preparation for writing to file
     private void generateNodeOutput(TrieNode currNode, int level){
         TrieNode[] children = currNode.getChildren();
         if(currNode.getChildren() == null){
@@ -138,15 +135,14 @@ public class Trie {
         //Possibly export nodes to file in here and get rid of exportNodeOutPut
         for(TrieNode currChild : children){
             if(currChild!=null){
-                nodeLevelStructure.add(Character.toString(currChild.getValue()));
-                if(currChild.isWord()){
-                    //nodeLevelStructure.add("LEAF");
-                }
+                nodeLevelStructure.add(Character.toString(currChild.getValue())+""+level);
                 generateNodeOutput(currChild,level+1);
+                if(level==0){
+                    nodeLevelStructure.add("\n");
+                }
             }
         }
     }
-
 
 
 }
