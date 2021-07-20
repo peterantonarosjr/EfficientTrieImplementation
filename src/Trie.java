@@ -136,8 +136,10 @@ public class Trie {
         for(TrieNode currChild : children){
             if(currChild!=null){
                 nodeLevelStructure.add(Character.toString(currChild.getValue())+""+level);
+                nodeLevelStructure.add(",");
                 generateNodeOutput(currChild,level+1);
                 if(level==0){
+                    nodeLevelStructure.remove(nodeLevelStructure.size()-1);
                     nodeLevelStructure.add("\n");
                 }
             }
